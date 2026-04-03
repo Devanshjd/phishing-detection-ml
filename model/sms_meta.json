@@ -1,0 +1,15 @@
+{
+  "task": "sms_spam_phishing_detection",
+  "model": "LogisticRegression",
+  "vectorizer": "TF-IDF (char_wb 3-5, max_features=100k)",
+  "train_time_sec": 0.358,
+  "test_accuracy": 0.989238,
+  "f1_spam": 0.958904,
+  "f1_legit": 0.993808,
+  "n_train": 4457,
+  "n_test": 1115,
+  "labels": {
+    "0": "legitimate/ham",
+    "1": "spam/phishing"
+  }
+}

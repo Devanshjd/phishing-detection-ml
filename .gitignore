@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+backend/history.db
+
+# Too large for GitHub (>100MB) - regenerate with training scripts
+model/rf_model.joblib
+model/best_model.joblib
+data/raw_emails/phishing_email.csv

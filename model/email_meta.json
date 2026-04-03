@@ -1,0 +1,15 @@
+{
+  "task": "email_phishing_detection",
+  "model": "LogisticRegression",
+  "vectorizer": "TF-IDF (char_wb 3-5, max_features=250k)",
+  "train_time_sec": 91.825,
+  "test_accuracy": 0.982786,
+  "f1_phishing": 0.983483,
+  "f1_legit": 0.982028,
+  "n_train": 65988,
+  "n_test": 16498,
+  "labels": {
+    "0": "legitimate",
+    "1": "phishing"
+  }
+}
