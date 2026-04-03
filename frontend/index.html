@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Threat Intelligence Platform</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div class="scanlines"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">AI</div>
+      <div class="brand-text">
+        <div class="brand-title">THREAT INTELLIGENCE</div>
+        <div class="brand-sub">REAL-TIME PHISHING DETECTION</div>
+      </div>
+    </div>
+
+    <div class="status">
+      <span class="dot"></span>
+      <span>SYSTEM ONLINE</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>AI-Powered Threat Analysis</h1>
+      <p>Advanced ML-based URL & Email phishing detection with history tracking and transparent model intelligence.</p>
+    </section>
+
+    <!-- TOP GRID: URL / EMAIL / SMS -->
+    <section class="grid3">
+      <!-- URL -->
+      <div class="panel neon">
+        <div class="panel-head">
+          <div class="panel-title">URL SCANNER</div>
+          <div class="panel-icons">🛡️</div>
+        </div>
+
+        <label class="field-label">Enter URL to scan</label>
+        <input id="urlInput" class="field" placeholder="e.g., https://example.com or paypal-login-confirm.freegift.ru" />
+        <button id="urlBtn" class="btn primary">SCAN URL</button>
+
+        <div id="urlAlert" class="alert hidden"></div>
+
+        <div id="urlMeters" class="meters hidden">
+          <div class="meter">
+            <div class="meter-label">Legit</div>
+            <div class="bar"><div id="urlLegitBar" class="bar-fill"></div></div>
+            <div id="urlLegitVal" class="meter-val">0%</div>
+          </div>
+          <div class="meter">
+            <div class="meter-label">Phishing</div>
+            <div class="bar"><div id="urlPhishBar" class="bar-fill danger"></div></div>
+            <div id="urlPhishVal" class="meter-val">0%</div>
+          </div>
+        </div>
+
+        <details class="details">
+          <summary>Technical Indicators</summary>
+          <pre id="urlIndicators" class="code"></pre>
+        </details>
+      </div>
+
+      <!-- EMAIL -->
+      <div class="panel neon">
+        <div class="panel-head">
+          <div class="panel-title">EMAIL SCANNER</div>
+          <div class="panel-icons">✨</div>
+        </div>
+
+        <label class="field-label">Subject</label>
+        <input id="emailSubject" class="field" placeholder="e.g., Urgent: Verify your account" />
+
+        <label class="field-label">Body</label>
+        <textarea id="emailBody" class="field area" placeholder="Paste email content to scan for phishing..."></textarea>
+
+        <label class="toggle">
+          <input id="aiEmailToggle" type="checkbox" checked />
+          <span>Enhanced AI Analysis (UI only / roadmap)</span>
+        </label>
+
+        <button id="emailBtn" class="btn primary">ANALYZE EMAIL</button>
+
+        <div id="emailAlert" class="alert hidden"></div>
+
+        <div id="emailMeters" class="meters hidden">
+          <div class="meter">
+            <div class="meter-label">Legit</div>
+            <div class="bar"><div id="emailLegitBar" class="bar-fill"></div></div>
+            <div id="emailLegitVal" class="meter-val">0%</div>
+          </div>
+          <div class="meter">
+            <div class="meter-label">Phishing</div>
+            <div class="bar"><div id="emailPhishBar" class="bar-fill danger"></div></div>
+            <div id="emailPhishVal" class="meter-val">0%</div>
+          </div>
+        </div>
+
+        <details class="details">
+          <summary>Technical Indicators</summary>
+          <pre id="emailIndicators" class="code"></pre>
+        </details>
+      </div>
+
+      <!-- SMS -->
+      <div class="panel neon">
+        <div class="panel-head">
+          <div class="panel-title">SMS SCANNER</div>
+          <div class="panel-icons">💬</div>
+        </div>
+
+        <label class="field-label">Message</label>
+        <textarea id="smsBody" class="field area" placeholder="Paste SMS message to scan for phishing..."></textarea>
+
+        <label class="toggle">
+          <input id="aiSmsToggle" type="checkbox" checked />
+          <span>Enhanced AI Analysis (UI only / roadmap)</span>
+        </label>
+
+        <button id="smsBtn" class="btn primary">ANALYZE SMS</button>
+
+        <div id="smsAlert" class="alert hidden"></div>
+
+        <div id="smsMeters" class="meters hidden">
+          <div class="meter">
+            <div class="meter-label">Legit</div>
+            <div class="bar"><div id="smsLegitBar" class="bar-fill"></div></div>
+            <div id="smsLegitVal" class="meter-val">0%</div>
+          </div>
+          <div class="meter">
+            <div class="meter-label">Phishing</div>
+            <div class="bar"><div id="smsPhishBar" class="bar-fill danger"></div></div>
+            <div id="smsPhishVal" class="meter-val">0%</div>
+          </div>
+        </div>
+
+        <details class="details">
+          <summary>Technical Indicators</summary>
+          <pre id="smsIndicators" class="code"></pre>
+        </details>
+
+        <div class="hint">
+          Powered by a dedicated SMS model trained on the UCI SMS Spam dataset. Falls back to email model if SMS model unavailable.
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM GRID: HISTORY + MODEL -->
+    <section class="grid2">
+      <!-- HISTORY -->
+      <div class="panel neon">
+        <div class="panel-head">
+          <div class="panel-title">SCAN HISTORY</div>
+          <div class="panel-icons">🕒</div>
+        </div>
+
+        <div class="history-top">
+          <button id="historyBtn" class="btn secondary">REFRESH HISTORY</button>
+          <div class="muted">Latest 20 scans from SQLite</div>
+        </div>
+
+        <div id="historyList" class="history"></div>
+      </div>
+
+      <!-- MODEL INTELLIGENCE -->
+      <div class="panel neon">
+        <div class="panel-head">
+          <div class="panel-title">MODEL INTELLIGENCE</div>
+          <div class="panel-icons">⚙️</div>
+        </div>
+
+        <div class="model-box">
+          <div class="model-name">PhishGuard ML</div>
+          <div class="model-acc">
+            <div class="acc-val" id="modelAcc">—</div>
+            <div class="acc-label">ACCURACY</div>
+          </div>
+        </div>
+
+        <div class="kv">
+          <div class="k">Algorithm</div>
+          <div class="v">Logistic Regression + TF-IDF (char n-grams)</div>
+
+          <div class="k">Backend</div>
+          <div class="v">FastAPI (Python) • scikit-learn</div>
+
+          <div class="k">Storage</div>
+          <div class="v">SQLite Scan History</div>
+
+          <div class="k">API</div>
+          <div class="v"><span id="apiLabel">—</span></div>
+        </div>
+
+        <div class="chips">
+          <span class="chip on">Hybrid Scoring</span>
+          <span class="chip">Threat Feed (soon)</span>
+          <span class="chip">Export PDF/CSV (soon)</span>
+          <span class="chip">Batch Scan (soon)</span>
+          <span class="chip">Chrome Extension (soon)</span>
+          <span class="chip">SOC Mode (soon)</span>
+        </div>
+
+        <div class="actions">
+          <button class="btn ghost" disabled title="Roadmap feature">EXPORT REPORT</button>
+          <button class="btn ghost" disabled title="Roadmap feature">ENTERPRISE API</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="muted">© Your Project • University + Startup MVP</div>
+    </footer>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
